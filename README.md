@@ -40,3 +40,58 @@ The premium frontend interface was engineered following rigorous accessibility s
 * *Direction*: East Path
 * *Crowd*: 15%
 * *Justification/Reasoning*: "I recommend heading to East Gate via the East Path. It currently has a crowd level of 15%. Your usual shortest route is extremely congested right now. Rerouted to a clearer path."
+
+## Deployment
+
+This application is deployed on Google Cloud Run as a containerized Node.js service.
+
+- Fully stateless architecture
+- Auto-scalable based on incoming requests
+- Lightweight container (<10MB excluding dependencies)
+
+Live URL: https://smart-stadium-ai-986344078772.asia-south1.run.app/
+
+## Google Cloud Integration
+
+The system is architected to simulate real-world Google Cloud patterns:
+
+- Firebase: Real-time synchronization of crowd density across stadium zones
+- BigQuery: Historical analytics used to predict congestion patterns and influence routing decisions
+- Vertex AI: Responsible for intent classification, reasoning, and structured response generation
+- Cloud Run: Hosts the containerized backend enabling scalable and stateless execution
+
+These services are orchestrated within the decision pipeline to ensure intelligent, context-aware responses.
+
+## System Flow
+
+User Input
+→ Context Builder (user state, preferences)
+→ Firebase (real-time crowd data)
+→ BigQuery (historical patterns)
+→ Decision Engine (rule-based logic + conflict resolution)
+→ Vertex AI (reasoning and response generation)
+→ Response Generator (final structured output)
+
+## Intelligence Highlights
+
+- Hybrid Decision System (rule-based + AI reasoning)
+- Real-time + historical data fusion
+- Adaptive routing under congestion (>85% fallback logic)
+- Alternative recommendations with comparison
+- Context-aware responses based on user preferences
+
+ ## Example Response
+
+Recommended: Food Stall 2 (East Gate)
+Crowd: Low (12%)
+Reason: Nearby stall has 78% congestion, rerouted for optimal wait time
+Alternative: Food Stall 1 (closer but high congestion)
+
+## Testing
+
+- Decision engine logic validated using Jest
+- Edge cases covered:
+  - Extreme congestion (>85%)
+  - Empty stadium (0% crowd)
+  - Invalid user input
+  - Route conflict scenarios
