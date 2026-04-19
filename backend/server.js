@@ -1,4 +1,3 @@
-// backend/server.js
 require('dotenv').config();
 
 const express = require('express');
@@ -14,19 +13,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve Static Frontend
+// Static
 app.use(express.static(path.join(__dirname, '../public')));
 
-// API Routes
+// Routes
 app.use('/api', apiRoutes);
 
-// Start Simulation Engine
-simulationEngine.startSimulation(2000); // 2 sec updates
+// Safe simulation start
+try {
+    simulationEngine.startSimulation(2000);
+} catch (err) {
+    console.error("[Simulation Error]", err);
+}
 
-// PORT (Cloud Run compatible)
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
-// Start Server (ONLY ONCE)
-app.listen(PORT, () => {
-    console.log(`[Server] Smart Stadium AI Assistant running on port ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`[Server] Running on port ${PORT}`);
 });

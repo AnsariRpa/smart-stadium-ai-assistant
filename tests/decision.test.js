@@ -31,7 +31,7 @@ describe('Decision Engine Route Strategy', () => {
         const result = decisionEngine.decideRoute('exit', crowdData, mockSession);
         // Should reroute to East Gate because 95 > 85 threshold
         expect(result.destination).toBe('East Gate');
-        expect(result.justification).toContain("extremely congested right now"); 
+        expect(result.justification).toContain("extremely congested right now");
     });
 
     test('Empty stadium scenario (0% crowd)', () => {
