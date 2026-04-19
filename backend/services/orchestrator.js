@@ -43,13 +43,16 @@ class Orchestrator {
             else if (query.match(/exit|leave/i)) baseIntent = 'exit';
 
             // Optional Data Gathering: BigQuery if event logic dictates (historical fallback or patterns)
+            let bqData = null;
             if (baseIntent === 'exit') {
-                const bqData = await bigQueryMock.getHistoricalPattern('Gates', 'exit_surge');
+                bqData = await bigQueryMock.getHistoricalPattern('Gates', 'exit_surge');
                 console.log(`[Orchestrator] BigQuery Insight used: Historical exit average is ${bqData.averageCrowd}%`);
+            } else if (baseIntent === 'food') {
+                bqData = await bigQueryMock.getHistoricalPattern('Food Stalls', 'halftime');
             }
 
             // 4. Decision Engine logic (runs BEFORE LLM generates final response)
-            const decisionData = decisionEngine.decideRoute(baseIntent, crowdData, session);
+            const decisionData = decisionEngine.decideRoute(baseIntent, crowdData, session, bqData);
 
             // 5. Response Generator / Final Analytics via Vertex AI
             const finalResponse = await vertexAIMock.classifyIntentAndReason(query, session, decisionData);

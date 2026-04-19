@@ -31,6 +31,11 @@ class VertexAIMock {
             responseText = `EMERGENCY PROTOCOL: Please stay calm and proceed immediately to ${decisionData.destination}. Security has been notified. Follow the illuminated signs towards ${decisionData.direction}.`;
         } else {
             responseText = `I recommend heading to ${decisionData.destination} via the ${decisionData.direction}. It currently has a crowd level of ${decisionData.crowdLevel}%. ${decisionData.justification}`;
+            
+            // Highlight Edge Cases + Alt Option
+            if (decisionData.alternative && decisionData.alternative.destination !== decisionData.destination) {
+                responseText += `\n\n**Alternative Option:** You could also head to ${decisionData.alternative.destination} via ${decisionData.alternative.direction}, which currently has a crowd level of ${decisionData.alternative.crowdLevel}%. However, we stand by our primary recommendation based on your preferences and active stadium modeling.`;
+            }
         }
 
         return {
