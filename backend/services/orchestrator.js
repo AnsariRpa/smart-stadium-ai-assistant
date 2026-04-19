@@ -58,7 +58,7 @@ class Orchestrator {
             return finalResponse;
 
         } catch (err) {
-            console.error('[Orchestrator] Fatal error, applying overall fallback:', err);
+            console.error(`[Orchestrator|ERROR] Fallback Triggered | Reason: ${err.message}`);
             return {
                 intent: 'unknown',
                 priority: 'normal',

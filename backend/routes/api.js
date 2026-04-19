@@ -1,6 +1,6 @@
 // backend/routes/api.js
 const express = require('express');
-const router = express.express.Router ? express.express.Router() : express.Router();
+const router = express.Router();
 const orchestrator = require('../services/orchestrator');
 const contextBuilder = require('../engine/context');
 const simulationEngine = require('../engine/simulation');

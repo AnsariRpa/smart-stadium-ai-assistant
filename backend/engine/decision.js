@@ -52,7 +52,7 @@ class DecisionEngine {
             
             // Conflict handling: If shortest is extremely congested (>85%), fallback to least crowded if available
             if (currentCrowd > 85 && possibleDestinations.length > 1) {
-                console.log('[Decision Engine] Conflict detected: Shortest route is too crowded. Triggering fallback to least crowded.');
+                console.log(`[Decision Engine|WARN] Conflict detected: Shortest route (${selectedDest}) is severely congested at ${currentCrowd}%. Triggering fallback logic.`);
                 let altDest = null;
                 possibleDestinations.forEach(dest => {
                     if (crowdData[dest] && crowdData[dest].crowdLevel < (altDest ? crowdData[altDest].crowdLevel : currentCrowd)) {
@@ -63,11 +63,13 @@ class DecisionEngine {
                     selectedDest = altDest;
                     currentCrowd = crowdData[selectedDest].crowdLevel;
                     justification = `Your usual shortest route is extremely congested right now. Rerouted to a clearer path.`;
+                    console.log(`[Decision Engine|FALLBACK] Rerouted safely to ${selectedDest} (${currentCrowd}% crowd).`);
                 } else {
                     justification = `This is the shortest route, though be advised it is currently highly congested.`;
                 }
             } else {
                 justification = `Selected based on your preference for the fastest route.`;
+                console.log(`[Decision Engine|LOG] Selected optimal shortest route: ${selectedDest} at ${currentCrowd}% crowd.`);
             }
             direction = this._getDirectionForZone(selectedDest);
             minimumCrowd = currentCrowd;
