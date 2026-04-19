@@ -1,0 +1,29 @@
+{
+  "name": "smart-stadium-ai-assistant",
+  "version": "1.0.0",
+  "description": "A modular AI assistant framework for smart stadiums, integrating LLMs and real-time data streams to handle spectator queries, facility wayfinding, and incident reporting via a conversational interface.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnsariRpa/smart-stadium-ai-assistant.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AnsariRpa/smart-stadium-ai-assistant/issues"
+  },
+  "homepage": "https://github.com/AnsariRpa/smart-stadium-ai-assistant#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "jest": "^30.3.0"
+  }
+}
