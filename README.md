@@ -43,17 +43,18 @@ The premium frontend interface was engineered following rigorous accessibility s
 
 ## Deployment
 
-This application is deployed on Google Cloud Run as a containerized Node.js service.
+The application is deployed on Google Cloud Run using a containerized Node.js service.
 
-- Fully stateless architecture
-- Auto-scalable based on incoming requests
-- Lightweight container (<10MB excluding dependencies)
+- Built and deployed via Google Cloud Build
+- Runs as a stateless service with automatic scaling
+- Handles dynamic request loads (e.g., halftime spikes)
+- Publicly accessible endpoint for real-time interaction
 
 Live URL: https://smart-stadium-ai-986344078772.asia-south1.run.app/
 
 ## Google Cloud Integration
 
-The system is architected to simulate real-world Google Cloud patterns:
+The system is designed to mirror real-world Google Cloud architectures using simulated data layers
 
 - Firebase: Real-time synchronization of crowd density across stadium zones
 - BigQuery: Historical analytics used to predict congestion patterns and influence routing decisions
@@ -72,6 +73,17 @@ User Input
 → Vertex AI (reasoning and response generation)
 → Response Generator (final structured output)
 
+## Decision Intelligence
+
+Unlike traditional chatbot systems, this solution separates decision-making from language generation.
+
+All routing decisions are computed deterministically using real-time and historical data before being passed to the AI layer for explanation.
+
+This ensures:
+- predictable behavior
+- safe routing decisions
+- zero hallucination in navigation logic
+
 ## Intelligence Highlights
 
 - Hybrid Decision System (rule-based + AI reasoning)
@@ -80,12 +92,13 @@ User Input
 - Alternative recommendations with comparison
 - Context-aware responses based on user preferences
 
- ## Example Response
+## Example Response
 
 Recommended: Food Stall 2 (East Gate)
 Crowd: Low (12%)
 Reason: Nearby stall has 78% congestion, rerouted for optimal wait time
 Alternative: Food Stall 1 (closer but high congestion)
+Confidence: High (based on real-time + historical alignment)
 
 ## Testing
 
